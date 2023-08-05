@@ -22,6 +22,7 @@ builder.Services.AddDbContext<ProductDbContext>(options =>
     //options.UseInMemoryDatabase("ProductDb");
 });
 builder.Services.AddScoped<IProductManager, ProductManager>();
+
 var logger = ErrorLogger.WriteLogToFile(builder.Configuration, $"Loggers/{DateTime.Now:dd/MM/yyyy}.txt");
 builder.Logging.AddSerilog(logger);
 var app = builder.Build();
