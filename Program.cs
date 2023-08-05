@@ -5,6 +5,7 @@ using ProductApi.Extensions;
 using ProductApi.Loggers;
 using ProductApi.Managers;
 using ProductApi.PaginationHelper;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,7 @@ builder.Services.AddDbContext<ProductDbContext>(options =>
 });
 builder.Services.AddScoped<IProductManager, ProductManager>();
 var logger = ErrorLogger.WriteLogToFile(builder.Configuration, $"Loggers/{DateTime.Now:dd/MM/yyyy}.txt");
-
+builder.Logging.AddSerilog(logger);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
